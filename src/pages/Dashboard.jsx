@@ -6,19 +6,21 @@ function Dashboard() {
   const [ data, setData ] = useState({});
 
   useEffect(() => {
-    handleDashboard()
+    load()
+    const interval = setInterval(load, 5000);
+    return () => clearInterval(interval)
   }, [])
 
-  async function handleDashboard() {
+  async function load() {
     const res = await api.get("/guests/dashboard")
 
-    console.log(res)
+    setData(res);
   }
 
   const chartData = [
     {name: "Total", value: data.total},
-    {name: "Confirmados", value: data.total},
-    {name: "Pendentes", value: data.total}
+    {name: "Confirmados", value: data.checked},
+    {name: "Pendentes", value: data.pending}
   ];
 
 
