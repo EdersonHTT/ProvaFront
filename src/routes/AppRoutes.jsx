@@ -1,11 +1,10 @@
 // import React from 'react'
-import { Routes } from "react-dom"
-import { BrowserRouter, Route } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Login from "../pages/Login"
-import PrivateRoutes from "./PrivateRoutes"
 import Reception from "../pages/Reception"
-import Dashboard from "../pages/DashBoard"
+import PrivateRoutes from "./PrivateRoutes"
 import GuestAdmin from "../pages/GuestAdmin"
+import Dashboard from "../pages/Dashboard"
 
 function AppRoutes() {
   return (
@@ -13,6 +12,24 @@ function AppRoutes() {
       <Routes >
 
         <Route path="/" element={<Login />}/>
+
+        <Route path="/reception" element={
+          <PrivateRoutes roleCompare={["admin", "recepcionista"]}>
+            <Reception />
+          </PrivateRoutes>
+        }/>
+
+        <Route path="/dashboard" element={
+          <PrivateRoutes roleCompare={["admin"]}>
+            <Dashboard />
+          </PrivateRoutes>
+        }/>
+
+        <Route path="/guestadmin" element={
+          <PrivateRoutes roleCompare={["admin"]}>
+            <GuestAdmin />
+          </PrivateRoutes>
+        }/>
 
 
       </Routes> 

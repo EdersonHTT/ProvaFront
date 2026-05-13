@@ -1,6 +1,6 @@
 import React from 'react'
 import Reception from '../pages/Reception';
-import Dashboard from '../pages/DashBoard';
+import Dashboard from '../pages/Dashboard';
 import { Navigate } from 'react-router-dom';
 
 function PrivateRoutes({ children, roleCompare}) {
@@ -12,10 +12,10 @@ function PrivateRoutes({ children, roleCompare}) {
     }
 
     if(roleCompare, roleCompare.includes(role)) {
-        return (<Navigate to="/reception" />)
+        return children
     }
 
-    return children
+    return <Navigate to="/reception" />
 }
 
 export default PrivateRoutes

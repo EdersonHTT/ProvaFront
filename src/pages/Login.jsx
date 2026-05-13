@@ -9,16 +9,18 @@ function Login() {
         const res = await api.post("/users/login", { email, password});
         console.log(res)
         const token = res.token;
-        const role = res.user.token;
+        const role = res.user.role;
 
-        localStorage.setItem(token)
-        localStorage.setItem(role)
+        localStorage.setItem("token", token);
+        localStorage.setItem("role", role);
 
         if(role === "admin") {
+            alert(role === "admin")
             window.location.href = "/dashboard";
+        } else {
+            window.location.href = "/reception";
         }
 
-        window.location.href = "/reception";
     }
 
   return (
